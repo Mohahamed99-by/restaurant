@@ -6,7 +6,17 @@ const Invoice = () => {
   const [selectedInvoice, setSelectedInvoice] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   
-  // Sample invoice data
+  const calculateTotal = (items) => {
+    return items.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+  };
+
+  const calculateFinalTotal = (subtotal, tax = 0.2, discount = 0) => {
+    const taxAmount = subtotal * tax;
+    const discountAmount = subtotal * discount;
+    return subtotal + taxAmount - discountAmount;
+  };
+
+  // Sample invoice data with tax and discounts
   const invoices = [
     {
       id: 'INV-2025-001',
@@ -17,7 +27,14 @@ const Invoice = () => {
         { name: 'Bruschetta', quantity: 1, price: 8.99 }
       ],
       status: 'Paid',
-      total: 67.96
+      tax: 0.2,
+      discount: 0.1,
+      get subtotal() {
+        return calculateTotal(this.items);
+      },
+      get total() {
+        return calculateFinalTotal(this.subtotal, this.tax, this.discount);
+      }
     },
     {
       id: 'INV-2025-002',
@@ -27,7 +44,14 @@ const Invoice = () => {
         { name: 'Calamari', quantity: 1, price: 12.99 }
       ],
       status: 'Pending',
-      total: 42.98
+      tax: 0.2,
+      discount: 0,
+      get subtotal() {
+        return calculateTotal(this.items);
+      },
+      get total() {
+        return calculateFinalTotal(this.subtotal, this.tax, this.discount);
+      }
     }
   ];
 
@@ -40,8 +64,31 @@ const Invoice = () => {
   };
 
   const handleDownload = () => {
-    // In a real application, this would generate a PDF
-    alert('Downloading invoice...');
+    if (!selectedInvoice) return;
+    
+    // Create invoice content
+    const invoiceContent = {
+      id: selectedInvoice.id,
+      date: selectedInvoice.date,
+      items: selectedInvoice.items,
+      subtotal: selectedInvoice.subtotal,
+      tax: selectedInvoice.tax * selectedInvoice.subtotal,
+      discount: selectedInvoice.discount * selectedInvoice.subtotal,
+      total: selectedInvoice.total
+    };
+
+    // Create a Blob with the invoice data
+    const blob = new Blob([JSON.stringify(invoiceContent, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    // Create download link and trigger click
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${selectedInvoice.id}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   const handleSearch = (e) => {
@@ -105,49 +152,72 @@ const Invoice = () => {
           {selectedInvoice ? (
             <>
               <div className="details-header">
-                <h2>Invoice Details</h2>
+                <h2>Invoice {selectedInvoice.id}</h2>
                 <div className="actions">
-                  <button onClick={handlePrint} className="action-button-invoice">
+                  <button className="action-button-invoice" onClick={handlePrint}>
                     <FaPrint /> Print
                   </button>
-                  <button onClick={handleDownload} className="action-button-invoice">
+                  <button className="action-button-invoice" onClick={handleDownload}>
                     <FaFileDownload /> Download
                   </button>
                 </div>
               </div>
 
-              <div className="details-content">
-                <div className="details-section">
-                  <h3>Invoice {selectedInvoice.id}</h3>
-                  <p className="date">Date: {selectedInvoice.date}</p>
-                </div>
+              <div className="details-section">
+                <h3>Invoice Details</h3>
+                <p className="date">Date: {selectedInvoice.date}</p>
+                <p className={`status ${selectedInvoice.status.toLowerCase()}`}>
+                  Status: {selectedInvoice.status}
+                </p>
+              </div>
 
-                <div className="items-table">
-                  <div className="table-header">
-                    <span>Item</span>
-                    <span>Quantity</span>
-                    <span>Price</span>
-                    <span>Total</span>
+              <div className="items-table">
+                <div className="table-header">
+                  <span>Item</span>
+                  <span>Quantity</span>
+                  <span>Price</span>
+                  <span>Total</span>
+                </div>
+                {selectedInvoice.items.map((item, index) => (
+                  <div key={index} className="table-row">
+                    <span>{item.name}</span>
+                    <span>{item.quantity}</span>
+                    <span>${item.price.toFixed(2)}</span>
+                    <span>${(item.quantity * item.price).toFixed(2)}</span>
                   </div>
-                  {selectedInvoice.items.map((item, index) => (
-                    <div key={index} className="table-row">
-                      <span>{item.name}</span>
-                      <span>{item.quantity}</span>
-                      <span>${item.price.toFixed(2)}</span>
-                      <span>${(item.quantity * item.price).toFixed(2)}</span>
-                    </div>
-                  ))}
+                ))}
+                <div className="table-footer">
+                  <span>Subtotal</span>
+                  <span></span>
+                  <span></span>
+                  <span>${selectedInvoice.subtotal.toFixed(2)}</span>
+                </div>
+                <div className="table-footer">
+                  <span>Tax ({(selectedInvoice.tax * 100)}%)</span>
+                  <span></span>
+                  <span></span>
+                  <span>${(selectedInvoice.tax * selectedInvoice.subtotal).toFixed(2)}</span>
+                </div>
+                {selectedInvoice.discount > 0 && (
                   <div className="table-footer">
-                    <span>Total Amount:</span>
-                    <span>${selectedInvoice.total.toFixed(2)}</span>
+                    <span>Discount ({(selectedInvoice.discount * 100)}%)</span>
+                    <span></span>
+                    <span></span>
+                    <span>-${(selectedInvoice.discount * selectedInvoice.subtotal).toFixed(2)}</span>
                   </div>
+                )}
+                <div className="table-footer">
+                  <span>Total</span>
+                  <span></span>
+                  <span></span>
+                  <span>${selectedInvoice.total.toFixed(2)}</span>
                 </div>
               </div>
             </>
           ) : (
             <div className="no-invoice-selected">
-              <h2>Select an invoice to view details</h2>
-              <p>Click on an invoice from the list to view its details</p>
+              <h2>Select an Invoice</h2>
+              <p>Choose an invoice from the list to view its details</p>
             </div>
           )}
         </div>

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Menu.css';
 
 const Menu = () => {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+
   const menuItems = [
     {
       category: 'Appetizers',
@@ -56,28 +58,55 @@ const Menu = () => {
     }
   ];
 
+  const categories = ['All', ...menuItems.map(item => item.category)];
+
+  const filteredMenu = selectedCategory === 'All' 
+    ? menuItems 
+    : menuItems.filter(item => item.category === selectedCategory);
+
   return (
     <div className="menu-container">
-      <h1>Our Menu</h1>
-      {menuItems.map((category, index) => (
-        <div key={index} className="menu-category">
-          <h2>{category.category}</h2>
-          <div className="menu-items">
-            {category.items.map((item, itemIndex) => (
-              <div key={itemIndex} className="menu-item">
-                <img src={item.image} alt={item.name} className="menu-item-image" />
-                <div className="menu-item-content">
-                  <div className="item-header">
-                    <h3>{item.name}</h3>
-                    <span className="price">{item.price}</span>
-                  </div>
-                  <p className="description">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+      <div className="menu-header">
+        <h1>Our Menu</h1>
+        <p className="menu-subtitle">Discover our culinary delights</p>
+        <div className="category-filter">
+          {categories.map((category, index) => (
+            <button
+              key={index}
+              className={`category-button ${selectedCategory === category ? 'active' : ''}`}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
         </div>
-      ))}
+      </div>
+
+      <div className="menu-content">
+        {filteredMenu.map((category, index) => (
+          <div key={index} className="menu-category">
+            <h2>{category.category}</h2>
+            <div className="menu-items">
+              {category.items.map((item, itemIndex) => (
+                <div key={itemIndex} className="menu-item">
+                  <img src={item.image} alt={item.name} className="menu-item-image" />
+                  <div className="menu-item-content">
+                    <div className="item-header">
+                      <h3>{item.name}</h3>
+                      <span className="price">{item.price}</span>
+                    </div>
+                    <p className="description">{item.description}</p>
+                    <div className="dietary-labels">
+                      <span className="dietary-label">Vegetarian</span>
+                      <span className="dietary-label">Gluten-free</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
