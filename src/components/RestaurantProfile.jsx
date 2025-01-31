@@ -1,4 +1,4 @@
-import { FaWhatsapp, FaUtensils, FaReceipt, FaCalendarAlt, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
+import { FaWhatsapp, FaUtensils, FaReceipt, FaCalendarAlt, FaMapMarkerAlt, FaClock, FaInstagram, FaFacebookF, FaTiktok } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import './RestaurantProfile.css';
 
@@ -20,16 +20,27 @@ const RestaurantProfile = () => {
           className="hero-image"
         />
         <div className="hero-content">
-          <h1>Your Restaurant Name</h1>
+          <h1>Restaurant Tolba</h1>
           <p className="tagline">Experience the finest dining in town</p>
           <div className="quick-info">
-            <div className="info-item">
-              <FaMapMarkerAlt />
-              <span>123 Gourmet Street, Foodville</span>
+            <div className="social-icons">
+              <a href="https://www.instagram.com/your-restaurant" target="_blank" rel="noopener noreferrer" className="social-icon instagram">
+                <FaInstagram />
+              </a>
+              <a href="https://www.facebook.com/your-restaurant" target="_blank" rel="noopener noreferrer" className="social-icon facebook">
+                <FaFacebookF />
+              </a>
+              <a href="https://www.tiktok.com/@your-restaurant" target="_blank" rel="noopener noreferrer" className="social-icon tiktok">
+                <FaTiktok />
+              </a>
             </div>
             <div className="info-item">
               <FaClock />
               <span>Open: 12:00 PM - 10:00 PM</span>
+            </div>
+            <div className="info-item">
+              <FaMapMarkerAlt />
+              <span>123 Gourmet Street, Foodville</span>
             </div>
           </div>
         </div>
