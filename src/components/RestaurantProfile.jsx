@@ -38,10 +38,7 @@ const RestaurantProfile = () => {
               <FaClock />
               <span>Open: 12:00 PM - 10:00 PM</span>
             </div>
-            <div className="info-item">
-              <FaMapMarkerAlt />
-              <span>123 Gourmet Street, Foodville</span>
-            </div>
+           
           </div>
         </div>
       </div>
