@@ -6,7 +6,8 @@ const RestaurantProfile = () => {
   const navigate = useNavigate();
   
   const handleWhatsAppClick = () => {
-    window.open('https://wa.me/+212612455372', '_blank');
+    const message = encodeURIComponent('Hello! I would like to place an order from Your Restaurant Name.');
+    window.open(`https://wa.me/+212612455372?text=${message}`, '_blank');
   };
 
   return (
