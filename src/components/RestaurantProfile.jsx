@@ -64,26 +64,6 @@ const RestaurantProfile = () => {
               </div>
             </div>
           </button>
-          
-          <button className="action-button invoice" onClick={() => navigate('/invoice')}>
-            <div className="button-content">
-              <FaReceipt className="icon" />
-              <div className="button-text">
-                <span className="primary-text">View Invoice</span>
-                <span className="secondary-text">Check your orders</span>
-              </div>
-            </div>
-          </button>
-          
-          <button className="action-button reserve" onClick={() => navigate('/reserve')}>
-            <div className="button-content">
-              <FaCalendarAlt className="icon" />
-              <div className="button-text">
-                <span className="primary-text">Reserve Table</span>
-                <span className="secondary-text">Book your special evening</span>
-              </div>
-            </div>
-          </button>
         </div>
       </div>
     </div>

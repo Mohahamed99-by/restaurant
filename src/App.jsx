@@ -1,19 +1,18 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import RestaurantProfile from './components/RestaurantProfile.jsx';
-import Menu from './components/Menu.jsx';
-import ReserveTable from './components/ReserveTable.jsx';
-import Invoice from './components/Invoice.jsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import RestaurantProfile from './components/RestaurantProfile';
+import Menu from './components/Menu';
+import QRCodePage from './components/QRCodePage';
+import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<RestaurantProfile />} />
         <Route path="/menu" element={<Menu />} />
-        <Route path="/invoice" element={<Invoice />} />
-        <Route path="/reserve" element={<ReserveTable />} />
+        <Route path="/qr" element={<QRCodePage />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

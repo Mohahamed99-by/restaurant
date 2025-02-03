@@ -1,105 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
 .menu-container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #f8f9fa, #ffffff);
-  padding: 4rem 2rem;
+  background-color: #fafafa;
+  padding: 2rem 1rem;
 }
 
 .menu-header {
   text-align: center;
-  margin-bottom: 4rem;
-  max-width: 800px;
-  margin: 0 auto 4rem;
+  margin-bottom: 3rem;
+  padding: 4rem 1rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+              url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1000&auto=format&fit=crop&q=80') center/cover;
+  color: white;
+  border-radius: 20px;
+}
+
+.menu-header h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
 }
 
 .menu-subtitle {
-  color: #636e72;
   font-size: 1.2rem;
   margin-bottom: 2rem;
+  font-weight: 300;
+  letter-spacing: 1px;
 }
 
 .category-filter {
   display: flex;
-  justify-content: center;
   gap: 1rem;
+  justify-content: center;
   flex-wrap: wrap;
   margin: 2rem 0;
 }
 
 .category-button {
   padding: 0.8rem 1.5rem;
-  border: 2px solid #e9ecef;
-  border-radius: 30px;
-  background: white;
-  color: #2d3436;
+  border: none;
+  background: transparent;
+  color: white;
   font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  font-weight: 500;
 }
 
 .category-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border-color: #FF6B6B;
-  color: #FF6B6B;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 .category-button.active {
-  background: #FF6B6B;
-  color: white;
-  border-color: #FF6B6B;
-}
-
-.menu-container h1 {
-  font-size: 3rem;
-  color: #2d3436;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  position: relative;
-  display: inline-block;
-}
-
-.menu-container h1::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: #FF6B6B;
-  border-radius: 2px;
+  background: white;
+  color: #000;
+  border-color: white;
 }
 
 .menu-content {
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .menu-category {
   margin-bottom: 4rem;
-  opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .menu-category h2 {
-  color: #2d3436;
   font-size: 2rem;
   margin-bottom: 2rem;
-  padding-bottom: 0.5rem;
+  font-family: 'Playfair Display', serif;
   position: relative;
-  display: inline-block;
+  padding-bottom: 1rem;
 }
 
 .menu-category h2::after {
@@ -107,45 +85,28 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(to right, #FF6B6B, transparent);
+  width: 60px;
+  height: 3px;
+  background: #d4af37;
 }
 
 .menu-items {
   display: grid;
-  gap: 2.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
 .menu-item {
   background: white;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-}
-
-.menu-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.6s;
-}
-
-.menu-item:hover::before {
-  transform: translateX(100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .menu-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .menu-item-image {
@@ -160,7 +121,7 @@
 }
 
 .menu-item-content {
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .item-header {
@@ -168,31 +129,25 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  gap: 1rem;
 }
 
 .item-header h3 {
-  margin: 0;
-  color: #2d3436;
   font-size: 1.4rem;
   font-weight: 600;
+  color: #333;
+  margin: 0;
 }
 
 .price {
-  background: #FF6B6B;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  box-shadow: 0 2px 4px rgba(255, 107, 107, 0.2);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #d4af37;
 }
 
 .description {
-  color: #636e72;
-  line-height: 1.6;
-  font-size: 1rem;
-  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
   margin-bottom: 1rem;
 }
 
@@ -203,96 +158,154 @@
 }
 
 .dietary-label {
+  padding: 0.3rem 0.8rem;
+  background: #f0f0f0;
+  border-radius: 20px;
   font-size: 0.8rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 15px;
-  background: #f1f2f6;
-  color: #2d3436;
+  color: #666;
+  font-weight: 500;
 }
 
-/* Tablet */
-@media (max-width: 1024px) {
+/* Large Screens */
+@media (min-width: 1400px) {
   .menu-container {
-    padding: 3rem 1.5rem;
+    padding: 3rem 2rem;
+  }
+
+  .menu-header {
+    padding: 6rem 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .menu-header h1 {
+    font-size: 4.5rem;
+  }
+
+  .menu-subtitle {
+    font-size: 1.4rem;
   }
 
   .menu-items {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-
-  .menu-container h1 {
-    font-size: 2.5rem;
-  }
-
-  .category-filter {
-    gap: 0.75rem;
-  }
-
-  .category-button {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.95rem;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .menu-container {
-    padding: 2rem 1rem;
-  }
-
-  .menu-items {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .menu-item {
-    max-width: 500px;
-    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .menu-item-image {
-    height: 200px;
+    height: 300px;
   }
 
-  .menu-item-content {
-    padding: 1.5rem;
-  }
-
-  .menu-container h1 {
-    font-size: 2rem;
-  }
-
-  .menu-category h2 {
+  .item-header h3 {
     font-size: 1.6rem;
   }
 
+  .price {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 1.1rem;
+  }
+}
+
+/* Tablet Landscape */
+@media (max-width: 1200px) {
+  .menu-items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .menu-header {
+    padding: 3.5rem 1.5rem;
+  }
+
+  .menu-header h1 {
+    font-size: 3rem;
+  }
+
+  .menu-category h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Tablet Portrait */
+@media (max-width: 900px) {
+  .menu-container {
+    padding: 1.5rem 1rem;
+  }
+
   .category-filter {
-    flex-direction: row;
     overflow-x: auto;
+    justify-content: flex-start;
     padding-bottom: 1rem;
     margin: 1.5rem -1rem;
-    padding: 0 1rem 1rem;
+    padding: 0 1rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .category-filter::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
   }
 
   .category-button {
     flex: 0 0 auto;
     white-space: nowrap;
   }
+
+  .menu-items {
+    gap: 1.5rem;
+  }
+
+  .menu-item-content {
+    padding: 1.2rem;
+  }
 }
 
-/* Small Mobile */
-@media (max-width: 480px) {
-  .menu-container {
-    padding: 1.5rem 1rem;
+/* Mobile Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+  .menu-header {
+    padding: 2rem 1rem;
+  }
+
+  .menu-items {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .menu-item-image {
     height: 180px;
   }
+}
 
-  .menu-item-content {
-    padding: 1.25rem;
+/* Mobile Portrait */
+@media (max-width: 576px) {
+  .menu-container {
+    padding: 1rem 0.8rem;
+  }
+
+  .menu-header {
+    padding: 2.5rem 1rem;
+    margin-bottom: 2rem;
+    border-radius: 15px;
+  }
+
+  .menu-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .menu-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .menu-items {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .menu-item {
+    border-radius: 15px;
+  }
+
+  .menu-item-image {
+    height: 180px;
   }
 
   .item-header {
@@ -306,39 +319,100 @@
   }
 
   .price {
-    font-size: 1rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 1.1rem;
   }
 
   .description {
     font-size: 0.9rem;
+    margin-bottom: 0.8rem;
   }
 
-  .menu-container h1 {
-    font-size: 1.8rem;
+  .dietary-label {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
   }
 
-  .menu-subtitle {
-    font-size: 1rem;
+  .menu-category {
+    margin-bottom: 2.5rem;
   }
 
-  .category-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
+  .menu-category h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
   }
 }
 
-/* Large Screens */
-@media (min-width: 1400px) {
-  .menu-content {
-    max-width: 1600px;
-  }
-
-  .menu-items {
-    grid-template-columns: repeat(3, 1fr);
+/* Small Mobile */
+@media (max-width: 360px) {
+  .menu-header h1 {
+    font-size: 2rem;
   }
 
   .menu-item-image {
-    height: 300px;
+    height: 160px;
+  }
+
+  .menu-item-content {
+    padding: 1rem;
+  }
+
+  .item-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .price {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+  }
+}
+
+/* Add smooth scrolling for all screen sizes */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add better touch handling for mobile devices */
+@media (hover: none) {
+  .menu-item:hover {
+    transform: none;
+  }
+
+  .menu-item:active {
+    transform: scale(0.98);
+  }
+
+  .menu-item:hover .menu-item-image {
+    transform: none;
+  }
+}
+
+/* Print styles for better menu printing */
+@media print {
+  .menu-container {
+    padding: 0;
+    background: white;
+  }
+
+  .menu-header {
+    background: none !important;
+    color: black;
+    padding: 2rem 0;
+  }
+
+  .category-filter {
+    display: none;
+  }
+
+  .menu-item {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #eee;
+  }
+
+  .menu-item-image {
+    height: 200px;
   }
 }
